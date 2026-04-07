@@ -1,0 +1,24 @@
+package object;
+
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
+import main.GamePanel;
+
+public class OBJ_Diploma extends SuperObject {
+
+	GamePanel gp;
+
+	public OBJ_Diploma(GamePanel gp) {
+
+		name = "Diploma";
+		try {
+			image = ImageIO.read(getClass().getResourceAsStream("/objects/Diploma.png"));
+			uTool.scaleImage(image, gp.tileSize, gp.tileSize);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+}

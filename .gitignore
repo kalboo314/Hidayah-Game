@@ -1,0 +1,57 @@
+# ============================================================
+#  HIDAYAH - Java Game Project .gitignore
+# ============================================================
+
+# --- Compiled output (Eclipse build folder) ---
+bin/
+*.class
+
+# --- Eclipse IDE files ---
+.classpath
+.project
+.settings/
+.metadata/
+
+# --- IntelliJ IDEA (jika suatu saat pindah IDE) ---
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# --- NetBeans ---
+nbproject/
+build/
+dist/
+nbbuild/
+
+# --- Library eksternal (download manual) ---
+lib/
+
+# --- macOS ---
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# --- Windows ---
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# --- Linux ---
+*~
+
+# --- Log files ---
+*.log
+
+# --- Package files ---
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# --- File duplikat / backup ---
+*copy*
+*(1)*
+*backup*
