@@ -54,7 +54,7 @@ public class quizThree extends Quiz {
 				totalScore += individualScore;
 				if (!isKeySpawned) { // Pastikan kunci hanya muncul sekali
 					gp.spawnDiploma(58, 41); // Contoh koordinat lokasi kunci
-					gp.ui.showNotification("Kunci baru telah muncul!");
+					gp.ui.showNotification("Anda layak untuk lulus");
 					isKeySpawned = true; // Tandai kunci sudah muncul
 					gp.savePlayerScore(totalScore);
 				}

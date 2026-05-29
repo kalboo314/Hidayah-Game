@@ -77,18 +77,8 @@ public class KeyHandler implements KeyListener {
 			}
 			if (code == KeyEvent.VK_ENTER) {
 				if (gp.ui.commandNum == 0) { // New Game
-					// Meminta nama pemain
-					String playerName = javax.swing.JOptionPane.showInputDialog(null, "Masukkan nama Anda:", "New Game",
-							javax.swing.JOptionPane.QUESTION_MESSAGE);
-
-					if (playerName != null && !playerName.trim().isEmpty()) {
-						gp.playerName = playerName.trim(); // Simpan nama pemain
-						gp.startNewGame(); // Panggil metode untuk memulai permainan baru
-						gp.gameState = gp.playState; // Ubah ke playState
+					if (gp.startNewGame()) {
 						gp.playMusic(0); // Mulai musik
-					} else {
-						javax.swing.JOptionPane.showMessageDialog(null, "Nama tidak boleh kosong!", "Peringatan",
-								javax.swing.JOptionPane.WARNING_MESSAGE);
 					}
 				}
 				if (gp.ui.commandNum == 1) { // Load Game

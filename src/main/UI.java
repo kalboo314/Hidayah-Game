@@ -186,6 +186,25 @@ public class UI {
 		notificationCounter = 120; // Notifikasi akan muncul selama 2 detik (120 frame)
 	}
 
+	public void resetForNewGame() {
+		messageOn = false;
+		message = "";
+		messageCounter = 0;
+		gameFinished = false;
+		currentDialouge = "";
+		currentQuestion = "";
+		notificationText = "";
+		notificationCounter = 0;
+		charIndex = 0;
+		lastCharTime = 0;
+		isWelcomeMessageDisplayed = false;
+		welcomeCharIndex = 0;
+		welcomeLastCharTime = 0;
+		commandNum = 0;
+		titleScreenState = 0;
+		subState = 0;
+	}
+
 	public void drawTitleScreen() {
 
 		if (titleScreenState == 0) {

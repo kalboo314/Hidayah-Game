@@ -64,6 +64,11 @@ public class Entity {
 		}
 	}
 
+	public void resetDialogue() {
+		dialogueIndex = 0;
+		isCompleted = false;
+	}
+
 	public void update() {
 		setAction();
 

@@ -47,9 +47,7 @@ public class Player extends Entity {
 		worldY = gp.tileSize * 50;
 		speed = 4;
 		direction = "down";
-		
-		
-		
+		hasKey = 0;
 	}
 
 	public void getPlayerImage() {
@@ -218,6 +216,9 @@ public class Player extends Entity {
 		if (i != 999) { // Pastikan ada NPC yang dapat diinteraksi
 			if (gp.keyH.enterPressed) {
 				gp.currentNPCIndex = i;
+				if (!gp.npc[i].hasNextDialogue()) {
+					gp.npc[i].resetDialogue();
+				}
 				gp.npc[i].speak(); // Gunakan metode speak() NPC
 			}
 		}

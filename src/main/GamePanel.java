@@ -130,7 +130,7 @@ public class GamePanel extends JPanel implements Runnable {
 		}
 	}
 
-	public void startNewGame() {
+	public boolean startNewGame() {
 		// Inisialisasi objek quiz jika null
 		if (quiz == null) {
 			quiz = new quizOne(this, keyH); // Atau instance quiz lainnya sesuai logika
@@ -141,21 +141,18 @@ public class GamePanel extends JPanel implements Runnable {
 				JOptionPane.PLAIN_MESSAGE);
 
 		// Validasi input
-		if (inputName == null || inputName.trim().isEmpty()) {
+		if (inputName == null) {
+			return false;
+		}
+		if (inputName.trim().isEmpty()) {
 			JOptionPane.showMessageDialog(this, "Nama tidak boleh kosong!", "Peringatan", JOptionPane.WARNING_MESSAGE);
-			startNewGame();
-			return;
+			return startNewGame();
 		}
-
-		// Reset game jika nama berbeda
-		if (!inputName.equals(playerName)) {
-			playerName = inputName;
-			resetGame();
-		}
+		inputName = inputName.trim();
 
 		// Cek apakah nama sudah ada di database
 		HashMap<String, Integer> gameData = FileManager.loadGameData();
-		if (gameData.containsKey(playerName)) {
+		if (gameData.containsKey(inputName)) {
 //			quiz.totalScore = gameData.get(playerName);
 //			totalScore = quiz.totalScore; // Sinkronisasi skor
 //			JOptionPane.showMessageDialog(this,
@@ -163,30 +160,52 @@ public class GamePanel extends JPanel implements Runnable {
 //					JOptionPane.INFORMATION_MESSAGE);
 			
 			JOptionPane.showMessageDialog(this, "Nama tidak boleh sama!", "Peringatan", JOptionPane.WARNING_MESSAGE);
-			startNewGame();
+			return startNewGame();
 		} else {
+			playerName = inputName;
 			quiz.totalScore = 0;
 			totalScore = 0; // Pastikan skor baru diinisialisasi
 			JOptionPane.showMessageDialog(this, "Selamat datang, " + playerName + "! Permainan dimulai dari awal.",
 					"Informasi", JOptionPane.INFORMATION_MESSAGE);
 			resetGame();
 			quiz.resetQuiz();
+			gameState = playState;
+			return true;
 		}
 
 	}
 
 	// Reset permainan
 	public void resetGame() {
-		initializeQuizzes();
+		obj = new SuperObject[10];
+		npc = new Entity[20];
+		quiz = new quizOne(this, keyH);
+		quizOne = new quizOne(this, keyH);
+		quizTwo = new quizTwo(this, keyH);
+		quizThree = new quizThree(this, keyH);
+		aSetter.setObject();
+		aSetter.setNPC();
 		individualScores.clear();
-		quiz.totalScore = 0;
+		Quiz.totalScore = 0;
+		totalScore = 0;
+		currentNPCIndex = 0;
 		quizOne.isQuizFinished = false;
 		quizOne.isKeySpawned = false;
 		quizTwo.isQuizFinished = false;
 		quizTwo.isKeySpawned = false;
 		quizThree.isKeySpawned = false;
 		quizThree.isQuizFinished = false;
+		quizOne.failCounter = 0;
+		quizTwo.failCounter = 0;
+		quizThree.failCounter = 0;
 		player.setDefaultValues();
+		keyH.upPressed = false;
+		keyH.downPressed = false;
+		keyH.leftPressed = false;
+		keyH.rightPressed = false;
+		keyH.enterPressed = false;
+		keyH.shiftPressed = false;
+		ui.resetForNewGame();
 
 		// Reset data lainnya
 	}
@@ -338,6 +357,8 @@ public class GamePanel extends JPanel implements Runnable {
 			String npcClassName = npc[currentNPCIndex].getClass().getSimpleName();
 			if (npcClassName.startsWith("Buku")) {
 				npc[currentNPCIndex] = null;
+			} else {
+				npc[currentNPCIndex].resetDialogue();
 			}
 		}
 		gameState = playState;
