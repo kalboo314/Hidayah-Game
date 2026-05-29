@@ -14,8 +14,8 @@ public class OBJ_Kursi2 extends SuperObject {
 
 		name = "Kursi2";
 		try {
-			image = ImageIO.read(getClass().getResourceAsStream("/objects/kursi_1 (1).png"));
-			uTool.scaleImage(image, gp.tileSize, gp.tileSize);
+			image = ImageIO.read(getClass().getResourceAsStream("/objects/kursi_1.png"));
+			image = uTool.scaleImage(image, gp.tileSize, gp.tileSize);
 
 		} catch (IOException e) {
 			e.printStackTrace();

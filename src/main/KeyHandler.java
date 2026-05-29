@@ -157,10 +157,12 @@ public class KeyHandler implements KeyListener {
 
 	public void dialogueState(int code) {
 		if (code == KeyEvent.VK_ENTER) {
-			if (gp.npc[gp.currentNPCIndex].hasNextDialogue()) {
+			if (gp.currentNPCIndex < 0 || gp.currentNPCIndex >= gp.npc.length || gp.npc[gp.currentNPCIndex] == null) {
+				gp.gameState = gp.playState;
+			} else if (gp.npc[gp.currentNPCIndex].hasNextDialogue()) {
 				gp.npc[gp.currentNPCIndex].nextDialogue();
 			} else {
-				gp.gameState = gp.playState; // Kembali ke Play State jika dialog selesai
+				gp.finishCurrentNPCDialogue(); // Kembali ke Play State jika dialog selesai
 			}
 		}
 	}
@@ -180,8 +182,10 @@ public class KeyHandler implements KeyListener {
 		}
 		if (code == KeyEvent.VK_ENTER) {
 			int playerAnswer = gp.ui.commandNum; // Ambil jawaban berdasarkan commandNum
-			boolean isCorrect = gp.quiz.checkAnswer(playerAnswer);
-			gp.quiz.displayQuiz(); // Tampilkan pertanyaan berikutnya
+			gp.quiz.checkAnswer(playerAnswer);
+			if (!gp.quiz.isFinished()) {
+				gp.quiz.displayQuiz(); // Tampilkan pertanyaan berikutnya
+			}
 		}
 	}
 

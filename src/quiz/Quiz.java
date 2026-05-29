@@ -60,6 +60,10 @@ public class Quiz {
 		keyH.gameOverState(hashCode());
 	}
 
+	public boolean isFinished() {
+		return questionIndex >= questions.length || questions[questionIndex] == null;
+	}
+
 	// Method untuk mengecek apakah kuis selesai
 	public boolean isScoreVisible() {
 		return scoreDisplayCounter > 0;

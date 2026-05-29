@@ -100,12 +100,25 @@ public class GamePanel extends JPanel implements Runnable {
 
 	public void setupGame() {
 
+		initializeQuizzes();
 		aSetter.setObject();
 		aSetter.setNPC();
 		gameState = titleState;
-		quizOne = new quizOne(this, keyH);
-		quizTwo = new quizTwo(this, keyH);
-		quizThree = new quizThree(this, keyH);
+	}
+
+	private void initializeQuizzes() {
+		if (quiz == null) {
+			quiz = new quizOne(this, keyH);
+		}
+		if (quizOne == null) {
+			quizOne = new quizOne(this, keyH);
+		}
+		if (quizTwo == null) {
+			quizTwo = new quizTwo(this, keyH);
+		}
+		if (quizThree == null) {
+			quizThree = new quizThree(this, keyH);
+		}
 	}
 
 	public void handleMenuSelection(String selection) {
@@ -164,6 +177,7 @@ public class GamePanel extends JPanel implements Runnable {
 
 	// Reset permainan
 	public void resetGame() {
+		initializeQuizzes();
 		individualScores.clear();
 		quiz.totalScore = 0;
 		quizOne.isQuizFinished = false;
@@ -317,6 +331,16 @@ public class GamePanel extends JPanel implements Runnable {
 
 	public HashMap<String, Integer> getIndividualScores() {
 		return individualScores;
+	}
+
+	public void finishCurrentNPCDialogue() {
+		if (currentNPCIndex >= 0 && currentNPCIndex < npc.length && npc[currentNPCIndex] != null) {
+			String npcClassName = npc[currentNPCIndex].getClass().getSimpleName();
+			if (npcClassName.startsWith("Buku")) {
+				npc[currentNPCIndex] = null;
+			}
+		}
+		gameState = playState;
 	}
 
 	public void paintComponent(Graphics g) {

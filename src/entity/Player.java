@@ -217,6 +217,7 @@ public class Player extends Entity {
 	public void interactNPC(int i) {
 		if (i != 999) { // Pastikan ada NPC yang dapat diinteraksi
 			if (gp.keyH.enterPressed) {
+				gp.currentNPCIndex = i;
 				gp.npc[i].speak(); // Gunakan metode speak() NPC
 			}
 		}
