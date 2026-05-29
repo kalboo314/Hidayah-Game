@@ -115,6 +115,8 @@ Hidayah-Game/
 - Haikal Jamil
 - Faroz Syakir
 - Lukmanul Hakim
+- Risma Dwi Purwandini
+- Aushof Ahmad Fathinun Naim
 
 ## License
 
